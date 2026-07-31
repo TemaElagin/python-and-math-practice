@@ -1,18 +1,23 @@
-mat = [[0, 0, 1], [1, 0, 0], [1, 1, 0]]
-# transposed = [list(row) for row in zip(*mat)]
-n = len(mat)
-m = len(mat[0])
-num_position = []
-for i in range(n):
-    for j in range(m):
-        if mat[i][j] == 1:
-            num_position.append([i, j])
-new_num_position = []
-for el in num_position:
-    is_unique = 0
-    for elem in num_position:
-        if el[0] == elem[0] or el[1] == elem[1]:
-            is_unique += 1
-    if is_unique == 1:
-        new_num_position.append(el)
+s = "III"
 
+Roman_numbers = {"I": 1, "V": 5, "X": 10, "L": 50, "C": 100, "D": 500, "M": 1000}
+s = reversed(s)
+s_list = list(s)
+result = 0
+i = 0
+while i < len(s_list):
+    if i != len(s_list) - 1:
+        if ((s_list[i] == "V" or s_list[i] == "X") and s_list[i+1] == "I") or\
+           ((s_list[i] == "L" or s_list[i] == "C") and s_list[i+1] == "X") or\
+           ((s_list[i] == "D" or s_list[i] == "M") and s_list[i+1] == "C"):
+            result += (Roman_numbers[s_list[i]] - Roman_numbers[s_list[i+1]])
+            print(result)
+            i += 2
+        else:
+            result += Roman_numbers[s_list[i]]
+            i += 1
+    else:
+        result += Roman_numbers[s_list[i]]
+        i += 1
+
+print(result)
