@@ -1,8 +1,3 @@
-nums = [2,7,11,15]
-target = 9
-
-for el in nums:
-    if target - el in nums:
-        print(sorted([nums.index(el), nums.index(target - el)]))
-
-
+l1 = [1, 3]
+l2 = [4, 5, 6]
+print(min(l1, l2))
