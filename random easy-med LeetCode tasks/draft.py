@@ -1,19 +1,31 @@
-s = "abcabcbb"
+# s = "()[]{}"
+# s = "([)]"
+# s = "([()]"
+# s = "{([]){}}"
+s = "(){}}{"
 
-s_list = list(s)
-symbols = []
-best_result = 1
-result = 0
-i = 0
-for el in s_list:
-    if el in symbols:
-        symbols = symbols[i-1:]
-        result -= (i-1)
-        i = 0
-    else:
-        i += 1
-        symbols.append(el)
-        result += 1
-    if result > best_result:
-        best_result = result
-print(best_result)
+el_dict = {")": "(", "]": "[", "}": "{"}
+result = True
+i_ok = []
+for i in range(len(s)):
+    if s[i] in el_dict:
+        if i == 0:
+            result = False
+        for j in range(i-1, -1, -1):
+            if j in i_ok:
+                continue
+            else:
+                if s[j] != el_dict[s[i]]:
+                    result = False
+                    # print("p2", i, j, s[j])
+                    break
+                else:
+
+                    i_ok.append(i)
+                    i_ok.append(j)
+                    break
+    if not result:
+        break
+if len(i_ok) != len(s):
+    result = False
+print(result, i_ok)
